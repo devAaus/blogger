@@ -1,4 +1,4 @@
-import "~/styles/globals.css";
+import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
@@ -15,8 +15,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${GeistSans.variable} min-h-screen bg-[#f3f1ea]`}>
-        <body>{children}</body>
+      <html lang="en" className={`${GeistSans.variable}`}>
+        <body>
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
