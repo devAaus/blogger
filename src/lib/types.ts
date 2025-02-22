@@ -3,6 +3,15 @@ import { PostFormValues } from "./validations/post"
 
 export type Role = "user" | "admin"
 
+export type CreateUserParams = {
+   id: string;
+   email: string;
+   userName: string;
+   firstName: string;
+   lastName: string;
+   avatar: string;
+}
+
 export interface User {
    id: string
    name: string

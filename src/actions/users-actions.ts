@@ -1,32 +1,33 @@
 "use server"
 
+import { CreateUserParams } from '@/lib/types';
+import { prisma } from '@/server/db';
 import { createClerkClient } from '@clerk/nextjs/server';
 
 const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
 
 export async function getAllUsers() {
-   try {
-      const userList = await clerkClient.users.getUserList();
+   const user = await prisma.user.findMany()
 
-      return userList;
-   } catch (error) {
-      console.error("Error fetching users from Clerk:", error);
-      throw error;
-   }
+   return user;
 }
 
 export async function getUserById(userId: string) {
-   try {
-      const user = await clerkClient.users.getUser(userId);
-      return {
-         id: user.id,
-         firstName: user.firstName,
-         lastName: user.lastName,
-         imageUrl: user.imageUrl,
-         email: user.primaryEmailAddress
-      };
-   } catch (error) {
-      console.error("Error fetching user from Clerk:", error);
-      throw error;
+   const user = await prisma.user.findUnique({
+      where: { id: userId }
+   });
+
+   if (!user) {
+      throw new Error("User not found");
    }
+
+   return user;
+}
+
+export async function createUser(user: CreateUserParams) {
+   const newUser = await prisma.user.create({
+      data: user
+   })
+
+   return newUser;
 }
