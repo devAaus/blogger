@@ -8,7 +8,7 @@ import { ArrowRight, Clock } from "lucide-react"
 
 export default function FeaturedSection({ featuredPost }: { featuredPost: any }) {
    return (
-      <section className=" px-4 md:px-6 py-12">
+      <section className="container px-4 md:px-6 py-12">
          <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-instrument-serif">Featured Post</h2>
             <Link href="/posts" className="text-gray-500 hover:text-gray-900 flex items-center">

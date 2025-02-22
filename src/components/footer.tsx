@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import { Facebook, Github, Instagram, Linkedin, X, } from 'lucide-react'
-import logo from "public/logo-white.png"
+import logo from "public/logo.png"
 
 export default function Footer() {
    const social = [
@@ -35,8 +35,8 @@ export default function Footer() {
 
    const currentYear = new Date().getFullYear()
    return (
-      <footer className="bg-black text-gray-200">
-         <div className=" px-4 py-8 md:py-12">
+      <footer className="">
+         <div className="container px-4 pt-8 md:pt-12">
             <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
                {/* Logo and Tagline */}
                <div className="flex flex-col items-center gap-2 md:items-start">
@@ -84,7 +84,7 @@ export default function Footer() {
             </div>
 
             {/* Copyright */}
-            <div className="mt-8 border-t pt-8">
+            <div className="mt-8 border-t py-4">
                <p className="text-center text-sm text-muted-foreground">
                   © {currentYear} blogger. All rights reserved.
                </p>

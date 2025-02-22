@@ -7,7 +7,7 @@ export default function HeroSection() {
    return (
       <section className="relative bg-[#f3f1ea] overflow-hidden">
          <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-         <div className=" px-4 md:px-6 py-20 md:py-32">
+         <div className="container px-4 md:px-6 py-20 md:py-32">
             <div className="flex flex-col items-center space-y-4 text-center relative z-10">
                <div className="space-y-2">
                   <h1 className="text-4xl font-instrument-serif sm:text-5xl md:text-6xl lg:text-7xl max-w-3xl mx-auto leading-tight">

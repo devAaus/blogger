@@ -13,7 +13,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
    const canEdit = user && (user.id === post.authorId || user.role === "admin")
 
    return (
-      <article className="max-w-5xl mx-auto px-4 py-12">
+      <article className="max-w-4xl mx-auto px-4 py-12">
          <div className="space-y-4 text-center mb-12">
             <div className="space-y-2">
                {post.categories.map((category) => (
@@ -81,7 +81,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
          {canEdit && (
             <div className="flex justify-end space-x-4 mt-8">
                <Button variant="outline" asChild>
-                  <Link href={`/posts/${params.slug}/edit`}>Edit Post</Link>
+                  <Link href={`/posts/${post.title}/edit`}>Edit Post</Link>
                </Button>
                <form
                // action={async () => {

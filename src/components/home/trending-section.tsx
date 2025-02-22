@@ -3,7 +3,7 @@ import BlogCard from "../blog-card"
 
 export default function TrendingSection({ trendingPosts }: { trendingPosts: any[] }) {
    return (
-      <section className=" px-4 md:px-6 py-12">
+      <section className="container px-4 md:px-6 py-12">
          <div className="flex items-center gap-2 mb-8">
             <TrendingUp className="h-6 w-6" />
             <h2 className="text-3xl font-instrument-serif">Trending Now</h2>

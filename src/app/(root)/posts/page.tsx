@@ -6,7 +6,7 @@ import { allPosts } from "@/lib/data"
 
 export default function AllPosts() {
    return (
-      <div className="px-4 py-12">
+      <div className="container px-4 py-12">
          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-12">
             <h1 className="text-4xl font-instrument-serif">All Posts</h1>
             <div className="flex w-full md:w-auto gap-4">
