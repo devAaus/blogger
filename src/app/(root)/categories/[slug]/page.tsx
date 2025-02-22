@@ -13,7 +13,7 @@ import BlogCard from "@/components/blog-card"
 export default async function CategoryPage(
    { params }: { params: { slug: string } }
 ) {
-   const { slug } = await params;
+   const { slug } = await Promise.resolve(params);
    const { category, posts } = await getCategoryBySlug(slug)
 
    if (!category) {
