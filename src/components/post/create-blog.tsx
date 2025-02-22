@@ -14,7 +14,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { toast } from "sonner"
 import { createPost } from "@/actions/posts-actions"
 import { useUploadThing } from "@/utils/uploadthing"
-import { CategoriesProps } from "@/lib/types"
+import type { CategoriesProps } from "@/lib/types"
 import BlogForm from "./blog-form"
 
 export default function CreateBlog(

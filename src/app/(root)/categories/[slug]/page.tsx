@@ -1,19 +1,20 @@
 import Link from "next/link"
-import Image from "next/image"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowLeft, BookOpen, Clock, Filter, Search, TrendingUp } from "lucide-react"
+import { ArrowLeft, Filter, Search } from "lucide-react"
 import { getCategoryBySlug } from "@/actions/category-actions"
 import { allCategories } from "@/lib/data"
 import BlogCard from "@/components/blog-card"
 
+type ParamsProps = {
+   params: Promise<{ slug: string }>
+}
+
 export default async function CategoryPage(
-   { params }: { params: { slug: string } }
+   { params }: ParamsProps
 ) {
-   const { slug } = await Promise.resolve(params);
+   const slug = (await params).slug
    const { category, posts } = await getCategoryBySlug(slug)
 
    if (!category) {
@@ -22,12 +23,8 @@ export default async function CategoryPage(
 
    const matchedCategory = allCategories.find((c) => c.name === category.title)
 
-   console.log(posts);
-
-
    return (
       <main className="container px-4 py-12">
-         {/* Back Button */}
          <Button variant="ghost" className="mb-8" asChild>
             <Link href="/categories">
                <ArrowLeft className="mr-2 h-4 w-4" />
@@ -35,13 +32,12 @@ export default async function CategoryPage(
             </Link>
          </Button>
 
-         {/* Category Header */}
          <div className="mb-8">
             <div className="flex items-start justify-between">
                <div>
                   <div className="flex items-center gap-3 mb-4">
                      <span className="text-4xl">
-                        {matchedCategory?.icon || "📌"}
+                        {matchedCategory?.icon ?? "📌"}
                      </span>
                      <h1 className="text-4xl font-instrument-serif">
                         {category.title}
@@ -54,7 +50,6 @@ export default async function CategoryPage(
             </div>
          </div>
 
-         {/* Filters and Search */}
          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
             <div className="relative w-full md:w-[300px]">
                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -79,7 +74,6 @@ export default async function CategoryPage(
          </div>
 
 
-         {/* All Posts */}
          <div>
             <h2 className="text-2xl font-instrument-serif mb-6">
                All Posts
@@ -91,7 +85,7 @@ export default async function CategoryPage(
             {posts.length > 0 ? (
                <>
                   <div className="grid md:grid-cols-3 gap-6">
-                     {posts.map((post: any) => (
+                     {posts.map((post) => (
                         < BlogCard key={post.slug} post={post} />
                      ))}
                   </div>

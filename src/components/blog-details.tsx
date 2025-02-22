@@ -1,11 +1,16 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Calendar, Clock } from "lucide-react"
+import { Calendar } from "lucide-react"
 import { Badge } from "./ui/badge";
+import { PostProps } from "@/lib/types";
+
+interface CardContent {
+   post: PostProps
+}
 
 export default function BlogDetails(
-   { post }: { post: any }
+   { post }: CardContent
 ) {
    const formattedDate = new Date(post.createdAt).toLocaleDateString();
    const user = post?.user
@@ -34,7 +39,7 @@ export default function BlogDetails(
          <div className="flex items-center justify-between py-6 border-y">
             <div className="flex items-center space-x-4">
                <Avatar>
-                  <AvatarImage src={user?.imageUrl} alt={user.firstName} />
+                  <AvatarImage src={user?.avatar} alt={user.firstName} />
                   <AvatarFallback>{user.firstName}</AvatarFallback>
                </Avatar>
                <div>

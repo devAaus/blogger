@@ -17,6 +17,8 @@ export async function getCategory() {
 
 
 export async function getCategoryBySlug(slug: string) {
+   console.log(slug);
+
    const cat = await prisma.category.findFirst({
       where: {
          slug,

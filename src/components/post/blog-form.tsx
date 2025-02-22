@@ -16,7 +16,7 @@ import {
    FormLabel,
    FormMessage
 } from "@/components/ui/form";
-import { FormProps } from "@/lib/types";
+import type { FormProps } from "@/lib/types";
 import FileUploader from "../file-uploader";
 
 

@@ -27,7 +27,7 @@ export default async function CategoriesPage() {
                      <Card className="h-full hover:shadow-lg transition-shadow">
                         <CardContent className="p-6">
                            <div className="flex items-center justify-between mb-4">
-                              <span className="text-3xl">{matchedCategory?.icon || "📌"}</span>
+                              <span className="text-3xl">{matchedCategory?.icon ?? "📌"}</span>
                               <Badge variant="secondary" className="flex items-center gap-1">
                                  <BookOpen className="h-3 w-3" />
                                  {category._count.posts} posts

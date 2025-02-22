@@ -3,6 +3,8 @@ import { toast } from 'sonner'
 import { Button } from './ui/button'
 import { ImagePlus, X } from "lucide-react";
 import { FileProps } from '@/lib/types';
+import Image from 'next/image';
+import { Input } from './ui/input';
 
 export default function FileUploader(
    {
@@ -69,7 +71,7 @@ export default function FileUploader(
          onDrop={handleDrop}
          onDragOver={handleDragOver}
       >
-         <input
+         <Input
             type="file"
             ref={fileInputRef}
             accept="image/*"
@@ -78,7 +80,7 @@ export default function FileUploader(
          />
          {previewUrl ? (
             <div className="relative">
-               <img
+               <Image
                   src={previewUrl || "/placeholder.svg"}
                   alt="Cover preview"
                   className="mx-auto max-h-[300px] object-cover rounded-lg"

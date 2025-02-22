@@ -1,10 +1,14 @@
 import { getPostBySlug } from "@/actions/posts-actions"
 import BlogDetails from "@/components/blog-details"
 
+type ParamsProps = {
+   params: Promise<{ slug: string }>
+}
+
 export default async function PostPage(
-   { params }: { params: { slug: string } }
+   { params }: ParamsProps
 ) {
-   const { slug } = await Promise.resolve(params);
+   const slug = (await params).slug
    const post = await getPostBySlug(slug)
    console.log(post);
 

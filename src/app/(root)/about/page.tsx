@@ -16,7 +16,7 @@ export default function AboutPage() {
             <div className="max-w-2xl mx-auto text-center mb-12">
                <h1 className="text-4xl font-instrument-serif mb-4">About Us</h1>
                <p className="text-xl text-muted-foreground mb-8">
-                  We're building the best platform for discovering and sharing knowledge.
+                  We`&apos;`re building the best platform for discovering and sharing knowledge.
                </p>
                <div className="flex justify-center gap-4">
                   <Button asChild>
@@ -53,7 +53,7 @@ export default function AboutPage() {
                   </p>
                   <p>
                      Every day, thousands of readers come to our platform to learn, grow, and connect with writers who share
-                     their expertise and experiences. We're committed to maintaining a space that promotes thoughtful discourse
+                     their expertise and experiences. We`&apos;`re committed to maintaining a space that promotes thoughtful discourse
                      and meaningful engagement.
                   </p>
                </div>
@@ -87,7 +87,7 @@ export default function AboutPage() {
                <CardContent className="p-12 text-center">
                   <h2 className="text-2xl font-instrument-serif mb-4">Join Our Community</h2>
                   <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                     Whether you're here to read, write, or connect, we'd love to have you as part of our community.
+                     Whether you`&apos;`re here to read, write, or connect, we`&apos;`d love to have you as part of our community.
                   </p>
                   <Button asChild size="lg">
                      <Link href="/posts">

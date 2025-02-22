@@ -1,9 +1,8 @@
-import { UseFormReturn } from "react-hook-form"
-import { PostFormValues } from "./validations/post"
+import type { UseFormReturn } from "react-hook-form";
+import type { PostFormValues } from "./validations/post";
 
-export type Role = "user" | "admin"
 
-export type CreateUserParams = {
+export interface CreateUserParams {
    id: string;
    email: string;
    userName: string;
@@ -13,19 +12,25 @@ export type CreateUserParams = {
 }
 
 export interface User {
-   id: string
-   name: string
-   email: string
-   role: Role
+   id: string;
+   email: string;
+   userName: string;
+   firstName: string;
+   lastName: string;
+   avatar: string;
+   createdAt: Date;
 }
-
-export interface Post {
+export interface PostProps {
    id: string
    title: string
+   excerpt: string
    content: string
-   authorId: string
-   published: boolean
+   userId: string
+   slug: string
+   imageUrl: string
    createdAt: Date
+   category: Category
+   user: User
 }
 
 export interface Category {
