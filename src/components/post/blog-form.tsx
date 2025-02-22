@@ -8,7 +8,6 @@ import {
    SelectValue
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import { ImagePlus, X } from "lucide-react";
 import {
    FormControl,
    FormDescription,
@@ -18,53 +17,19 @@ import {
    FormMessage
 } from "@/components/ui/form";
 import { FormProps } from "@/lib/types";
-import Image from "next/image";
-import { useRef } from "react";
-import { toast } from "sonner";
-import { Button } from "./ui/button";
+import FileUploader from "../file-uploader";
+
 
 export default function BlogForm(
    {
       form,
-      coverImage,
-      setCoverImage,
       categories,
+      setSelectedImage,
+      previewUrl,
+      setPreviewUrl,
+      fileInputRef,
    }: FormProps
 ) {
-
-   const fileInputRef = useRef<HTMLInputElement>(null)
-
-   const handleImageClick = () => {
-      fileInputRef.current?.click()
-   }
-
-   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0]
-      if (file) {
-         if (file.size > 5 * 1024 * 1024) {
-            toast.error("Image size should be less than 5MB")
-            return
-         }
-
-         if (!file.type.startsWith("image/")) {
-            toast.error("Please upload an image file")
-            return
-         }
-
-         const reader = new FileReader()
-         reader.onloadend = () => {
-            setCoverImage(reader.result as string)
-         }
-         reader.readAsDataURL(file)
-      }
-   }
-
-   const handleRemoveImage = () => {
-      setCoverImage(null)
-      if (fileInputRef.current) {
-         fileInputRef.current.value = ""
-      }
-   }
    return (
       <Card>
          <CardContent className="p-6">
@@ -104,39 +69,12 @@ export default function BlogForm(
                <FormItem>
                   <FormLabel>Cover Image</FormLabel>
                   <FormControl>
-                     <div className="relative border-2 border-dashed rounded-lg p-4 text-center hover:border-gray-400 transition-colors">
-                        <input
-                           type="file"
-                           ref={fileInputRef}
-                           accept="image/*"
-                           className="hidden"
-                           onChange={handleImageChange}
-                        />
-                        {coverImage ? (
-                           <div className="relative">
-                              <img
-                                 src={coverImage || "/placeholder.svg"}
-                                 alt="Cover"
-                                 className="mx-auto max-h-[300px] object-cover rounded-lg"
-                              />
-                              <Button
-                                 type="button"
-                                 variant="destructive"
-                                 size="icon"
-                                 className="absolute top-2 right-2"
-                                 onClick={handleRemoveImage}
-                              >
-                                 <X className="h-4 w-4" />
-                              </Button>
-                           </div>
-                        ) : (
-                           <div className="py-8 cursor-pointer" onClick={handleImageClick}>
-                              <ImagePlus className="mx-auto h-12 w-12 text-gray-400" />
-                              <p className="mt-2 text-sm text-gray-500">Click or drag to upload cover image</p>
-                              <p className="text-xs text-gray-400 mt-1">PNG, JPG or GIF up to 5MB</p>
-                           </div>
-                        )}
-                     </div>
+                     <FileUploader
+                        setSelectedImage={setSelectedImage}
+                        previewUrl={previewUrl}
+                        setPreviewUrl={setPreviewUrl}
+                        fileInputRef={fileInputRef}
+                     />
                   </FormControl>
                   <FormDescription>Recommended size: 1200x630 pixels. Max size: 5MB.</FormDescription>
                </FormItem>
@@ -144,7 +82,7 @@ export default function BlogForm(
                <div className="grid grid-cols-2 gap-6">
                   <FormField
                      control={form.control}
-                     name="categoryId"
+                     name="categorySlug"
                      render={({ field }) => (
                         <FormItem>
                            <FormLabel>Category</FormLabel>
@@ -156,8 +94,8 @@ export default function BlogForm(
                               </FormControl>
                               <SelectContent>
                                  {categories.map((category) => (
-                                    <SelectItem key={category.value} value={category.value}>
-                                       {category.label}
+                                    <SelectItem key={category.slug} value={category.slug}>
+                                       {category.title}
                                     </SelectItem>
                                  ))}
                               </SelectContent>

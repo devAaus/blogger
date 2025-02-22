@@ -30,7 +30,7 @@ export default async function CategoriesPage() {
                               <span className="text-3xl">{matchedCategory?.icon || "📌"}</span>
                               <Badge variant="secondary" className="flex items-center gap-1">
                                  <BookOpen className="h-3 w-3" />
-                                 {category.posts.length} posts
+                                 {category._count.posts} posts
                               </Badge>
                            </div>
                            <h2 className="text-xl font-semibold mb-2">{category.title}</h2>

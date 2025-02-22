@@ -16,10 +16,11 @@ export const postFormSchema = z.object({
       .min(1, { message: 'Content is required' })
       .min(100, { message: "Content must be at least 100 characters" })
       .max(50000, { message: "Content must be less than 50,000 characters" }),
-   categoryId: z.string({
+   categorySlug: z.string({
       required_error: "Please select a category",
    }),
-   coverImage: z.string(),
+   imageUrl: z
+      .string(),
 })
 
 export type PostFormValues = z.infer<typeof postFormSchema>

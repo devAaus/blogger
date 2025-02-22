@@ -15,8 +15,8 @@ export async function createPost(formData: FormData) {
       title: formData.get("title"),
       excerpt: formData.get("excerpt"),
       content: formData.get("content"),
-      coverImage: formData.get("coverImage"),
-      categoryId: formData.get("categoryId"),
+      imageUrl: formData.get("imageUrl"),
+      categorySlug: formData.get("categorySlug"),
    }
 
    const validatedData = postFormSchema.parse(data)
@@ -29,8 +29,8 @@ export async function createPost(formData: FormData) {
          slug,
          excerpt: validatedData.excerpt,
          content: validatedData.content,
-         coverImage: validatedData.coverImage,
-         categoryId: Number(validatedData.categoryId),
+         imageUrl: validatedData.imageUrl,
+         categorySlug: validatedData.categorySlug,
          userId: user.id,
       },
    })

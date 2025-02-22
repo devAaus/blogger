@@ -19,15 +19,35 @@ export interface Post {
    createdAt: Date
 }
 
-export interface categories {
-   value: string;
-   label: string;
+export interface Category {
+   id: number;
+   title: string;
+   slug: string;
+   description: string;
+   createdAt: Date;
+   updatedAt: Date;
+   _count: {
+      posts: number;
+   };
+}
+
+export interface CategoriesProps {
+   category: Category[];
+}
+
+export interface FileProps {
+   setSelectedImage: (value: File | null) => void;
+   previewUrl: string | null;
+   setPreviewUrl: (value: string | null) => void;
+   fileInputRef: React.RefObject<HTMLInputElement>;
 }
 
 export interface FormProps {
    form: UseFormReturn<PostFormValues>;
-   coverImage: string | null;
-   setCoverImage: (value: string | null) => void;
-   categories: categories[];
+   categories: Category[];
+   setSelectedImage: (value: File | null) => void;
+   previewUrl: string | null;
+   setPreviewUrl: (value: string | null) => void;
+   fileInputRef: React.RefObject<HTMLInputElement>;
 }
 
