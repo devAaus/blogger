@@ -1,3 +1,6 @@
+import { UseFormReturn } from "react-hook-form"
+import { PostFormValues } from "./validations/post"
+
 export type Role = "user" | "admin"
 
 export interface User {
@@ -14,5 +17,17 @@ export interface Post {
    authorId: string
    published: boolean
    createdAt: Date
+}
+
+export interface categories {
+   value: string;
+   label: string;
+}
+
+export interface FormProps {
+   form: UseFormReturn<PostFormValues>;
+   coverImage: string | null;
+   setCoverImage: (value: string | null) => void;
+   categories: categories[];
 }
 
