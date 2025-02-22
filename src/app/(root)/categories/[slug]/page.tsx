@@ -14,13 +14,16 @@ export default async function CategoryPage(
    { params }: { params: { slug: string } }
 ) {
    const { slug } = await Promise.resolve(params);
-   const category = await getCategoryBySlug(slug)
+   const { category, posts } = await getCategoryBySlug(slug)
 
    if (!category) {
       return <div>Category not found</div>
    }
 
    const matchedCategory = allCategories.find((c) => c.name === category.title)
+
+   console.log(posts);
+
 
    return (
       <main className="container px-4 py-12">
@@ -81,15 +84,15 @@ export default async function CategoryPage(
             <h2 className="text-2xl font-instrument-serif mb-6">
                All Posts
                (<span>
-                  {category.posts.length} posts
+                  {category?.posts?.length} posts
                </span>)
             </h2>
 
-            {category.posts.length > 0 ? (
+            {posts.length > 0 ? (
                <>
                   <div className="grid md:grid-cols-3 gap-6">
-                     {category.posts.map((post) => (
-                        <BlogCard key={post.slug} post={post} />
+                     {posts.map((post: any) => (
+                        < BlogCard key={post.slug} post={post} />
                      ))}
                   </div>
 
@@ -105,6 +108,7 @@ export default async function CategoryPage(
                </h2>
             )}
          </div>
+
       </main>
    )
 }

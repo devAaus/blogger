@@ -30,6 +30,28 @@ export async function getAllPosts() {
    return postsWithUserDetails;
 }
 
+export async function getPostBySlug(slug: string) {
+   const post = await prisma.post.findUnique({
+      where: {
+         slug,
+      },
+      include: {
+         category: true,
+      },
+   })
+
+   if (!post) {
+      throw new Error("Post not found")
+   }
+
+   const user = await getUserById(post.userId)
+
+   return {
+      ...post,
+      user
+   }
+}
+
 export async function createPost(formData: FormData) {
    const user = await currentUser()
    if (!user) {
@@ -64,18 +86,4 @@ export async function createPost(formData: FormData) {
       success: true,
       message: "Post created successfully",
    }
-}
-
-
-export async function getPostBySlug(slug: string) {
-   const post = await prisma.post.findUnique({
-      where: {
-         slug,
-      },
-      include: {
-         category: true,
-      },
-   })
-
-   return post;
 }
