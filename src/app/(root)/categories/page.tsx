@@ -3,9 +3,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { BookOpen } from "lucide-react"
 import { allCategories } from "@/lib/data"
+import { getCategory } from "@/actions/category-actions"
 
-export default function CategoriesPage() {
-
+export default async function CategoriesPage() {
+   const categories = await getCategory()
 
    return (
       <main className="container px-4 py-12 md:py-16">
@@ -17,32 +18,29 @@ export default function CategoriesPage() {
          </div>
 
          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {allCategories.map((category) => (
-               <Link key={category.name} href={`/categories/${category.name.toLowerCase()}`}>
-                  <Card className="h-full hover:shadow-lg transition-shadow">
-                     <CardContent className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                           <span className="text-3xl">{category.icon}</span>
-                           <Badge variant="secondary" className="flex items-center gap-1">
-                              <BookOpen className="h-3 w-3" />
-                              {category.count} posts
-                           </Badge>
-                        </div>
-                        <h2 className="text-xl font-semibold mb-2">{category.name}</h2>
-                        <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                           {category.featured.map((topic) => (
-                              <Badge key={topic} variant="outline">
-                                 {topic}
+            {categories.map((category) => {
+               // Find the matching category in allCategories
+               const matchedCategory = allCategories.find((c) => c.name === category.title)
+
+               return (
+                  <Link key={category.id} href={`/categories/${category.slug}`}>
+                     <Card className="h-full hover:shadow-lg transition-shadow">
+                        <CardContent className="p-6">
+                           <div className="flex items-center justify-between mb-4">
+                              <span className="text-3xl">{matchedCategory?.icon || "📌"}</span>
+                              <Badge variant="secondary" className="flex items-center gap-1">
+                                 <BookOpen className="h-3 w-3" />
+                                 {category.posts.length} posts
                               </Badge>
-                           ))}
-                        </div>
-                     </CardContent>
-                  </Card>
-               </Link>
-            ))}
+                           </div>
+                           <h2 className="text-xl font-semibold mb-2">{category.title}</h2>
+                           <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
+                        </CardContent>
+                     </Card>
+                  </Link>
+               )
+            })}
          </div>
       </main>
    )
 }
-

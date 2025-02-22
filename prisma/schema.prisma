@@ -12,7 +12,7 @@ model Post {
     title      String
     excerpt    String   @db.Text
     content    String   @db.Text
-    coverImage String
+    imageUrl   String
     slug       String   @db.Text
     userId     String
 
@@ -25,7 +25,8 @@ model Post {
 
 model Category {
     id          Int      @id @default(autoincrement())
-    name        String   @unique
+    title       String   @unique
+    slug        String
     description String   @db.Text
 
     posts       Post[]
