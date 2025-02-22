@@ -2,9 +2,11 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
 import BlogCard from "@/components/blog-card"
-import { allPosts } from "@/lib/data"
+import { getAllPosts } from "@/actions/posts-actions"
 
-export default function AllPosts() {
+export default async function AllPosts() {
+   const allPosts = await getAllPosts()
+
    return (
       <div className="container px-4 py-12">
          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-12">
@@ -20,7 +22,7 @@ export default function AllPosts() {
 
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {allPosts.map((post) => (
-               <BlogCard key={post.slug} post={post} />
+               <BlogCard key={post.id} post={post} />
             ))}
          </div>
 

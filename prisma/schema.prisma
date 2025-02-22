@@ -13,7 +13,7 @@ model Post {
     excerpt    String   @db.Text
     content    String   @db.Text
     imageUrl   String
-    slug       String   @db.Text
+    slug       String   @unique
     userId     String
 
     categorySlug String
