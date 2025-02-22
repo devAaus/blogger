@@ -73,7 +73,7 @@ export default function Footer() {
                {/* Social Links */}
                <div className="flex items-center gap-4">
                   {social.map((s) => (
-                     <Link href={s.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                     <Link key={s.href} href={s.href} className="text-muted-foreground hover:text-foreground transition-colors">
                         {s.icon}
                         <span className="sr-only">
                            {s.title}

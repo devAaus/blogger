@@ -3,9 +3,11 @@ import Navbar from "@/components/navbar"
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
    return (
-      <div className="min-h-screen bg-[#f3f1ea]">
+      <div className=" bg-[#f3f1ea]">
          <Navbar />
-         {children}
+         <main className="min-h-screen">
+            {children}
+         </main>
          <Footer />
       </div>
    )
