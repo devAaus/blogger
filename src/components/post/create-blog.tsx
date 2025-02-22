@@ -12,10 +12,10 @@ import { Form } from "@/components/ui/form"
 import { Loader2 } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { toast } from "sonner"
-import BlogForm from "@/components/post/blog-form"
 import { createPost } from "@/actions/posts-actions"
 import { useUploadThing } from "@/utils/uploadthing"
 import { CategoriesProps } from "@/lib/types"
+import BlogForm from "./blog-form"
 
 export default function CreateBlog(
    { category }: CategoriesProps
