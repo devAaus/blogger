@@ -29,6 +29,7 @@ model Post {
     content    String   @db.Text
     imageUrl   String
     slug       String   @unique
+    views      String   
 
     authorId     String
     author       Author     @relation(fields: [authorId], references: [clerkId], onDelete: Cascade)

@@ -1,14 +1,29 @@
 
+import { getAllAuthors } from '@/actions/author-actions'
+import { getAllCategories } from '@/actions/category-actions'
+import { getAllPosts } from '@/actions/posts-actions'
 import {
+  FeaturedSection,
   HeroSection,
+  PopularCategories,
+  TopAuthors,
+  TrendingSection,
 } from '@/components/home/index'
 
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts = await getAllPosts()
+  const authors = await getAllAuthors()
+  const categories = await getAllCategories()
+
+  const featuredPost = posts[0];
+  const trendingPosts = posts.slice(1, 4);
+  const topAuthors = authors;
+
   return (
     <main className="flex-1">
       <HeroSection />
-      {/* <FeaturedSection featuredPost={featuredPost} />
+      <FeaturedSection featuredPost={featuredPost} />
       <TrendingSection trendingPosts={trendingPosts} />
 
       <section className="container px-4 md:px-6 py-12">
@@ -16,7 +31,7 @@ export default function HomePage() {
           <PopularCategories categories={categories} />
           <TopAuthors topAuthors={topAuthors} />
         </div>
-      </section> */}
+      </section>
     </main>
   )
 }

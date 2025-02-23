@@ -1,7 +1,7 @@
 import { prisma } from "@/server/db";
 
 
-export async function getCategory() {
+export async function getAllCategories() {
    const categories = await prisma.category.findMany({
       include: {
          _count: {

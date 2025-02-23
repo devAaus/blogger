@@ -1,4 +1,5 @@
 import { getPostBySlug } from "@/actions/posts-actions"
+import NotFound from "@/app/not-found"
 import BlogDetails from "@/components/blog-details"
 
 type ParamsProps = {
@@ -10,7 +11,9 @@ export default async function PostPage(
 ) {
    const slug = (await params).slug
    const post = await getPostBySlug(slug)
-   console.log(post);
+   if (!post) {
+      return <NotFound />
+   }
 
    return (
       <BlogDetails post={post} />

@@ -20,20 +20,30 @@ export default async function AllPosts() {
             </div>
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allPosts.map((post) => (
-               <BlogCard key={post.id} post={post} />
-            ))}
-         </div>
+         {allPosts.length > 0 ? (
+            <>
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {allPosts.map((post) => (
+                     <BlogCard key={post.id} post={post} />
+                  ))}
+               </div>
 
-         <div className="flex justify-center mt-12">
-            <Button variant="outline" className="mx-2">
-               Previous
-            </Button>
-            <Button variant="outline" className="mx-2">
-               Next
-            </Button>
-         </div>
+               <div className="flex justify-center mt-12">
+                  <Button variant="outline" className="mx-2">
+                     Previous
+                  </Button>
+                  <Button variant="outline" className="mx-2">
+                     Next
+                  </Button>
+               </div>
+            </>
+         ) : (
+            <>
+               <h1>
+                  No posts found. Please check back later or create a new post.
+               </h1>
+            </>
+         )}
       </div>
    )
 }

@@ -19,7 +19,7 @@ export async function getAllPosts() {
 }
 
 export async function getPostBySlug(slug: string) {
-   const post = await prisma.post.findUnique({
+   return await prisma.post.findUnique({
       where: {
          slug,
       },
@@ -28,12 +28,6 @@ export async function getPostBySlug(slug: string) {
          author: true,
       },
    })
-
-   if (!post) {
-      throw new Error("Post not found")
-   }
-
-   return post;
 }
 
 export async function createPost(formData: FormData) {

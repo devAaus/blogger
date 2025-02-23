@@ -7,8 +7,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { ArrowRight, Clock } from "lucide-react"
 import { Post } from '@/lib/types'
 
+interface FeaturedProps {
+   featuredPost: Post | undefined
+}
+
 export default function FeaturedSection(
-   { featuredPost }: { featuredPost: Post }
+   { featuredPost }: FeaturedProps
 ) {
    const author = featuredPost?.author
    return (
@@ -20,31 +24,31 @@ export default function FeaturedSection(
                <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
          </div>
-         <Link href={`/posts/${featuredPost.slug}`}>
-            <Card className="group overflow-hidden">
+         <Link href={`/posts/${featuredPost?.slug}`}>
+            <Card className="group overflow-hidden p-1">
                <div className="md:grid md:grid-cols-2 gap-6">
                   <div className="relative aspect-video md:aspect-auto overflow-hidden">
                      <Image
-                        src={featuredPost.imageUrl || "/placeholder.svg"}
-                        alt={featuredPost.title}
+                        src={featuredPost?.imageUrl || "/placeholder.svg"}
+                        alt={featuredPost?.title ?? ''}
                         fill
                         className="object-cover transition-transform group-hover:scale-105"
                      />
                   </div>
                   <div className="p-6 flex flex-col justify-center">
                      <Badge className="w-fit mb-4" variant="secondary">
-                        {featuredPost.category.title}
+                        {featuredPost?.category.title}
                      </Badge>
-                     <CardTitle className="text-2xl md:text-3xl font-instrument-serif mb-4">{featuredPost.title}</CardTitle>
-                     <p className="text-gray-500 mb-6 line-clamp-3">{featuredPost.excerpt}</p>
+                     <CardTitle className="text-2xl md:text-3xl font-instrument-serif mb-4">{featuredPost?.title}</CardTitle>
+                     <p className="text-gray-500 mb-6 line-clamp-3">{featuredPost?.excerpt}</p>
                      <div className="flex items-center justify-between mt-auto">
                         <div className="flex items-center gap-3">
                            <Avatar>
-                              <AvatarImage src={author.avatar} alt={author.firstName} />
-                              <AvatarFallback>{author.firstName}</AvatarFallback>
+                              <AvatarImage src={author?.avatar} alt={author?.firstName} />
+                              <AvatarFallback>{author?.firstName}</AvatarFallback>
                            </Avatar>
                            <div>
-                              <p className="font-medium">{author.firstName}</p>
+                              <p className="font-medium">{author?.firstName}</p>
                            </div>
                         </div>
                         <div className="flex items-center text-sm text-gray-500">

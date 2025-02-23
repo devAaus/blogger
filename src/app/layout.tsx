@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import NextTopLoader from 'nextjs-toploader';
 
 export const metadata: Metadata = {
   title: "blogger.",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body className="font-sans">
+          <NextTopLoader />
           {children}
         </body>
       </html>
