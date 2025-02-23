@@ -1,6 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import { createAuthor } from '@/actions/author-actions'
 
 export async function POST(req: Request) {
    const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
@@ -51,7 +52,26 @@ export async function POST(req: Request) {
    const eventType = evt.type
 
    if (eventType === 'user.created') {
-      console.log('userId:', evt.data.id)
+      const {
+         id,
+         email_addresses,
+         image_url,
+         first_name,
+         last_name,
+         username
+      } = evt.data
+
+      const user = {
+         clerkId: id,
+         email: email_addresses[0]?.email_address ?? '',
+         firstName: first_name ?? '',
+         lastName: last_name ?? '',
+         userName: username ?? '',
+         avatar: image_url
+      }
+
+      const newUser = await createAuthor(user);
+
    }
 
    return new Response('Webhook received', { status: 200 })
