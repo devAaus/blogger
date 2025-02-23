@@ -10,12 +10,12 @@ export const postFormSchema = z.object({
       .string()
       .min(1, { message: 'Excerpt is required' })
       .min(60, { message: "Excerpt must be at least 60 characters" })
-      .max(200, { message: "Excerpt must be less than 200 characters" }),
+      .max(100, { message: "Excerpt must be less than 100 characters" }),
    content: z
       .string()
       .min(1, { message: 'Content is required' })
       .min(100, { message: "Content must be at least 100 characters" })
-      .max(50000, { message: "Content must be less than 50,000 characters" }),
+      .max(5000, { message: "Content must be less than 5000 characters" }),
    categorySlug: z.string({
       required_error: "Please select a category",
    }),

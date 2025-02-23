@@ -2,7 +2,6 @@ import Link from "next/link"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import Image from "next/image"
 import { Badge } from "./ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { BookOpen } from "lucide-react"
 import { Post } from "@/lib/types"
 import AuthorAvatar from "./author-avatar"
@@ -41,14 +40,20 @@ export default function BlogCard({ post }: CardContent) {
             <CardTitle className="text-xl font-instrument-serif">
                <Link href={`/posts/${post.slug}`} className="hover:underline">
                   <CardTitle className="text-xl font-instrument-serif">
-                     {post.title.length > 6 ? post.title.substring(0, 6) + "..." : post.title}
+                     {post.title.length > 36
+                        ? post.title.substring(0, 36) + "..."
+                        : post.title
+                     }
                   </CardTitle>
                </Link>
             </CardTitle>
          </CardHeader>
          <CardContent>
             <p className="text-gray-500 text-sm line-clamp-2">
-               {post.excerpt.length > 30 ? post.excerpt.substring(0, 30) + "..." : post.excerpt}
+               {post.excerpt.length > 80
+                  ? post.excerpt.substring(0, 80) + "..."
+                  : post.excerpt
+               }
             </p>
          </CardContent>
          <CardFooter className="flex justify-between items-center">

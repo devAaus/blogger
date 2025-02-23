@@ -30,6 +30,7 @@ export interface Category {
    description: string;
    createdAt: Date;
    updatedAt: Date;
+   _count?: { posts: number };
 }
 
 export interface CategoriesProps {

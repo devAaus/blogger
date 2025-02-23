@@ -42,40 +42,48 @@ export default function CreateBlog(
 
    async function onSubmit(data: PostFormValues) {
       try {
-         let imageUrl = null
+         if (!selectedImage) {
+            toast.error("Please select an image before publishing.");
+            return;
+         }
+
+         if (!data.categorySlug) {
+            toast.error("Please select a category");
+            return;
+         }
 
          // Upload image if one is selected
-         if (selectedImage) {
-            const uploadResult = await startUpload([selectedImage])
-            if (!uploadResult) {
-               toast.error("Failed to upload image")
-               return
-            }
-            imageUrl = uploadResult[0]?.url
+         const uploadResult = await startUpload([selectedImage]);
+         if (!uploadResult) {
+            toast.error("Failed to upload image");
+            return;
          }
+         const imageUrl = uploadResult[0]?.url ?? "";
 
          // Create form data with image URL
-         const formData = new FormData()
+         const formData = new FormData();
          Object.entries(data).forEach(([key, value]) => {
-            if (value) formData.append(key, value)
-         })
+            if (value) formData.append(key, value);
+         });
+
          if (imageUrl) {
-            formData.append("imageUrl", imageUrl)
+            formData.append("imageUrl", imageUrl);
          }
 
-         const result = await createPost(formData)
+         const result = await createPost(formData);
 
          if (result.success) {
-            toast.success("Post created successfully")
-            router.push("/posts")
+            toast.success("Post created successfully");
+            router.push("/posts");
          } else {
-            toast.error("Failed to create post")
+            toast.error("Failed to create post");
          }
       } catch (error) {
-         toast.error("Something went wrong")
-         console.error("Failed to create post:", error)
+         toast.error("Something went wrong");
+         console.error("Failed to create post:", error);
       }
    }
+
 
    return (
       <div className="container max-w-4xl mx-auto px-4 py-12">

@@ -83,6 +83,8 @@ export default function FileUploader(
                <Image
                   src={previewUrl || "/placeholder.svg"}
                   alt="Cover preview"
+                  width={300}
+                  height={300}
                   className="mx-auto max-h-[300px] object-cover rounded-lg"
                />
                <Button

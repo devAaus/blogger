@@ -21,7 +21,7 @@ export default function Categorycard(
                   <span className="text-3xl">{matchedCategory?.icon ?? "📌"}</span>
                   <Badge variant="secondary" className="flex items-center gap-1">
                      <BookOpen className="h-3 w-3" />
-                     6 posts
+                     {category?._count?.posts ?? 0} posts
                   </Badge>
                </div>
                <h2 className="text-xl font-semibold mb-2">{category.title}</h2>
