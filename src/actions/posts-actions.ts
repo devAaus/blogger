@@ -6,6 +6,19 @@ import slugify from "slugify"
 import { currentUser } from '@clerk/nextjs/server'
 
 
+export async function incrementPostViews(slug: string) {
+   await prisma.post.update({
+      where: {
+         slug,
+      },
+      data: {
+         views: {
+            increment: 1,
+         },
+      },
+   })
+}
+
 export async function getAllPosts() {
    const posts = await prisma.post.findMany({
       include: {
@@ -19,6 +32,7 @@ export async function getAllPosts() {
 }
 
 export async function getPostBySlug(slug: string) {
+   await incrementPostViews(slug)
    return await prisma.post.findUnique({
       where: {
          slug,

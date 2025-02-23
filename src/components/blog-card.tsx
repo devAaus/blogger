@@ -5,6 +5,7 @@ import { Badge } from "./ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { BookOpen } from "lucide-react"
 import { Post } from "@/lib/types"
+import AuthorAvatar from "./author-avatar"
 
 interface CardContent {
    post: Post
@@ -29,7 +30,7 @@ export default function BlogCard({ post }: CardContent) {
             <div className="absolute top-2 right-2">
                <Badge variant="secondary" className="flex items-center gap-1">
                   <BookOpen className="h-3 w-3" />
-                  0 views
+                  {post.views} views
                </Badge>
             </div>
          </div>
@@ -51,17 +52,7 @@ export default function BlogCard({ post }: CardContent) {
             </p>
          </CardContent>
          <CardFooter className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-               <Avatar className="h-8 w-8">
-                  <AvatarImage src={author.avatar} alt={author.firstName} />
-                  <AvatarFallback>
-                     {author.firstName}
-                  </AvatarFallback>
-               </Avatar>
-               <span className="text-sm font-medium">
-                  {author.firstName} {author.lastName}
-               </span>
-            </div>
+            <AuthorAvatar author={author} />
             <span className="text-sm text-gray-500">
                {formattedDate}
             </span>

@@ -3,9 +3,9 @@ import React from 'react'
 import { Card, CardTitle } from '../ui/card'
 import Image from 'next/image'
 import { Badge } from '../ui/badge'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { ArrowRight, Clock } from "lucide-react"
 import { Post } from '@/lib/types'
+import AuthorAvatar from '../author-avatar'
 
 interface FeaturedProps {
    featuredPost: Post | undefined
@@ -42,15 +42,7 @@ export default function FeaturedSection(
                      <CardTitle className="text-2xl md:text-3xl font-instrument-serif mb-4">{featuredPost?.title}</CardTitle>
                      <p className="text-gray-500 mb-6 line-clamp-3">{featuredPost?.excerpt}</p>
                      <div className="flex items-center justify-between mt-auto">
-                        <div className="flex items-center gap-3">
-                           <Avatar>
-                              <AvatarImage src={author?.avatar} alt={author?.firstName} />
-                              <AvatarFallback>{author?.firstName}</AvatarFallback>
-                           </Avatar>
-                           <div>
-                              <p className="font-medium">{author?.firstName}</p>
-                           </div>
-                        </div>
+                        <AuthorAvatar author={author} />
                         <div className="flex items-center text-sm text-gray-500">
                            <Clock className="mr-1 h-4 w-4" />
                            5 min read

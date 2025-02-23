@@ -44,6 +44,7 @@ export interface Post {
    authorId: string
    slug: string
    imageUrl: string
+   views: number
    createdAt: Date
    category: Category
    author: Author

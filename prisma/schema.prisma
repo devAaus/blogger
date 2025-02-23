@@ -11,7 +11,7 @@ model Author {
     id          String   @id @default(cuid())
     clerkId     String   @unique
     email       String   @unique
-    userName    String   
+    userName    String   @unique
     firstName   String
     lastName    String   
     avatar      String
@@ -29,7 +29,7 @@ model Post {
     content    String   @db.Text
     imageUrl   String
     slug       String   @unique
-    views      String   
+    views      Int     @default(0) 
 
     authorId     String
     author       Author     @relation(fields: [authorId], references: [clerkId], onDelete: Cascade)
