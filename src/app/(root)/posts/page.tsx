@@ -28,14 +28,15 @@ export default async function AllPosts() {
                   ))}
                </div>
 
-               <div className="flex justify-center mt-12">
-                  <Button variant="outline" className="mx-2">
-                     Previous
-                  </Button>
-                  <Button variant="outline" className="mx-2">
-                     Next
-                  </Button>
-               </div>
+               {allPosts.length > 6 &&
+                  <div className="flex justify-center mt-12">
+                     <Button variant="outline" className="mx-2">
+                        Previous
+                     </Button>
+                     <Button variant="outline" className="mx-2">
+                        Next
+                     </Button>
+                  </div>}
             </>
          ) : (
             <>

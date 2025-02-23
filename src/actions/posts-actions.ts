@@ -44,6 +44,28 @@ export async function getPostBySlug(slug: string) {
    })
 }
 
+
+export async function getPostsByUsername(username: string) {
+   const user = await prisma.author.findUnique({
+      where: { userName: username },
+      select: { id: true },
+   })
+
+   if (!user) {
+      throw new Error("User not found")
+   }
+
+   return await prisma.post.findMany({
+      where: { authorId: user.id },
+      include: {
+         category: true,
+         author: true,
+      },
+      orderBy: { createdAt: "desc" },
+   })
+}
+
+
 export async function createPost(formData: FormData) {
    const user = await currentUser()
    if (!user) {

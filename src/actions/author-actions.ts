@@ -16,25 +16,32 @@ export async function getAllAuthors() {
    return author;
 }
 
-export async function getAuthorById(authorId: string) {
+export async function getAuthorByUsername(username: string) {
+   if (!username) {
+      throw new Error("Username is required")
+   }
+
    const author = await prisma.author.findUnique({
-      where: { id: authorId },
+      where: {
+         userName: username
+      },
       include: {
          posts: {
             include: {
-               category: true,
                author: true,
-            },
-         },
+               category: true
+            }
+         }
       },
-   });
+   })
 
    if (!author) {
-      throw new Error("Author not found");
+      throw new Error("Author not found")
    }
 
    return author;
 }
+
 
 export async function createAuthor(author: CreateAuthorParams) {
    const newAuthor = await prisma.author.create({

@@ -95,11 +95,13 @@ export default async function CategoryPage(
                      ))}
                   </div>
 
-                  <div className="flex justify-center mt-12">
-                     <Button variant="outline" size="lg">
-                        Load More Posts
-                     </Button>
-                  </div>
+                  {posts.length > 6 &&
+                     <div className="flex justify-center mt-12">
+                        <Button variant="outline" size="lg">
+                           Load More Posts
+                        </Button>
+                     </div>
+                  }
                </>
             ) : (
                <h2 className="text-xl text-center mt-12">
