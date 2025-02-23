@@ -4,6 +4,7 @@ import { postFormSchema } from "@/lib/validations/post"
 import { prisma } from "@/server/db"
 import slugify from "slugify"
 import { currentUser } from '@clerk/nextjs/server'
+import { revalidatePath } from "next/cache"
 
 
 export async function incrementPostViews(slug: string) {
@@ -66,6 +67,26 @@ export async function getPostsByUsername(username: string) {
 }
 
 
+export async function getCurrentUserPosts() {
+   const user = await currentUser()
+   if (!user) {
+      throw new Error("User not found")
+   }
+
+   // Get posts created by the current user
+   return await prisma.post.findMany({
+      where: {
+         authorId: user.id,
+      },
+      include: {
+         category: true,
+         author: true,
+      },
+      orderBy: { createdAt: "desc" },
+   })
+}
+
+
 export async function createPost(formData: FormData) {
    const user = await currentUser()
    if (!user) {
@@ -99,5 +120,22 @@ export async function createPost(formData: FormData) {
    return {
       success: true,
       message: "Post created successfully",
+   }
+}
+
+export async function deletePost(id: string) {
+   const post = await prisma.post.findUnique({
+      where: { id },
+   })
+   if (!post) {
+      throw new Error("Post not found")
+   }
+   await prisma.post.delete({
+      where: { id },
+   })
+   revalidatePath("/author/dashboard")
+   return {
+      success: true,
+      message: "Post deleted successfully",
    }
 }

@@ -1,10 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Calendar, Clock } from "lucide-react"
+import { ArrowLeft, Calendar, Clock } from "lucide-react"
 import { Badge } from "./ui/badge";
 import type { Post } from "@/lib/types";
 import NotFound from "@/app/not-found";
+import { Button } from "./ui/button";
 
 interface CardContent {
    post: Post
@@ -18,6 +19,12 @@ export default function BlogDetails(
 
    return (
       <article className="max-w-4xl mx-auto px-4 py-12">
+         <Button variant="ghost" className="mb-8" asChild>
+            <Link href="/posts">
+               <ArrowLeft className="mr-2 h-4 w-4" />
+               All Posts
+            </Link>
+         </Button>
          <div className="space-y-4 text-center mb-12">
             <div className="space-y-2">
                <Link
@@ -59,7 +66,7 @@ export default function BlogDetails(
             </div>
          </div>
 
-         <div className="relative aspect-[2/1] my-8">
+         <div className="relative aspect-[24/10] my-8">
             <Image
                src={post.imageUrl || "/placeholder.svg"}
                alt={post.title}

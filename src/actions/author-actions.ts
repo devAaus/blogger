@@ -2,6 +2,7 @@
 
 import type { CreateAuthorParams } from '@/lib/types';
 import { prisma } from '@/server/db';
+import { currentUser } from '@clerk/nextjs/server';
 
 export async function getAllAuthors() {
    const author = await prisma.author.findMany({
@@ -42,6 +43,20 @@ export async function getAuthorByUsername(username: string) {
    return author;
 }
 
+export async function getLoggedInUser() {
+   const user = await currentUser()
+   if (!user) {
+      throw new Error("User not found")
+   }
+
+   const author = await prisma.author.findMany({
+      where: {
+         clerkId: user.id,
+      },
+   })
+
+   return author[0];
+}
 
 export async function createAuthor(author: CreateAuthorParams) {
    const newAuthor = await prisma.author.create({

@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import logo from "public/logo.png"
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
-import { Button } from "./ui/button"
+import { Button, buttonVariants } from "./ui/button"
 
 const navLinks = [
    {
@@ -47,6 +47,12 @@ export default function Navbar() {
             </div>
             <div className="flex items-center gap-4">
                <SignedIn>
+                  <Link href={'/posts/new'} className={buttonVariants()}>
+                     Create a Post
+                  </Link>
+                  <Link href={'/author/dashboard'} className={buttonVariants()}>
+                     Dashboard
+                  </Link>
                   <UserButton />
                </SignedIn>
                <SignedOut>

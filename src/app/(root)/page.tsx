@@ -16,8 +16,8 @@ export default async function HomePage() {
   const authors = await getAllAuthors()
   const categories = await getAllCategories()
 
-  const featuredPost = posts[0];
-  const trendingPosts = posts.slice(1, 4);
+  const featuredPost = posts[posts.length - 1];
+  const trendingPosts = posts.filter(post => post.slug !== featuredPost?.slug);
   const topAuthors = authors;
 
   return (

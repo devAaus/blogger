@@ -10,3 +10,7 @@ export function isArrayOfFile(files: unknown): files is File[] {
   if (!isArray) return false
   return files.every((file) => file instanceof File)
 }
+
+export function formattedDate(date: Date) {
+  return new Date(date).toLocaleDateString();
+}

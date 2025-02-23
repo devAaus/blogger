@@ -3,9 +3,10 @@ import React from 'react'
 import { Card, CardTitle } from '../ui/card'
 import Image from 'next/image'
 import { Badge } from '../ui/badge'
-import { ArrowRight, Clock } from "lucide-react"
+import { ArrowRight, BookOpen, Calendar, Clock } from "lucide-react"
 import { Post } from '@/lib/types'
 import AuthorAvatar from '../author-avatar'
+import { formattedDate } from '@/lib/utils'
 
 interface FeaturedProps {
    featuredPost: Post | undefined
@@ -36,6 +37,12 @@ export default function FeaturedSection(
                         className="object-cover transition-transform group-hover:scale-105"
                      />
                   </Link>
+                  <div className="absolute top-2 right-2">
+                     <Badge variant="secondary" className="flex items-center gap-1">
+                        <BookOpen className="h-3 w-3" />
+                        {featuredPost?.views} views
+                     </Badge>
+                  </div>
                </div>
                <div className="p-6 flex flex-col justify-center">
                   <Badge className="w-fit mb-4" variant="secondary">
@@ -48,8 +55,8 @@ export default function FeaturedSection(
                   <div className="flex items-center justify-between mt-auto">
                      <AuthorAvatar author={author} />
                      <div className="flex items-center text-sm text-gray-500">
-                        <Clock className="mr-1 h-4 w-4" />
-                        5 min read
+                        <Calendar className="mr-1 h-4 w-4" />
+                        {formattedDate(featuredPost?.createdAt)}
                      </div>
                   </div>
                </div>
