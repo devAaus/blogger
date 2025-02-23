@@ -7,8 +7,9 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model User {
-    id          String   @id @unique
+model Author {
+    id          String   @id @default(cuid())
+    clerkId     String   @unique
     email       String   @unique
     userName    String   
     firstName   String
@@ -22,15 +23,15 @@ model User {
 }
 
 model Post {
-    id         Int      @id @default(autoincrement())
+    id         String   @id @default(cuid())
     title      String
     excerpt    String   @db.Text
     content    String   @db.Text
     imageUrl   String
     slug       String   @unique
 
-    userId     String
-    user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    authorId     String
+    author       Author     @relation(fields: [authorId], references: [clerkId], onDelete: Cascade)
 
     categorySlug String
     category     Category @relation(fields: [categorySlug], references: [slug], onDelete: Cascade)
@@ -40,7 +41,7 @@ model Post {
 }
 
 model Category {
-    id          Int      @id @default(autoincrement())
+    id          String   @id @default(cuid())
     title       String   @unique
     slug        String   @unique
     description String   @db.Text

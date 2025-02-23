@@ -15,11 +15,13 @@ export default async function CategoryPage(
    { params }: ParamsProps
 ) {
    const slug = (await params).slug
-   const { category, posts } = await getCategoryBySlug(slug)
+   const { category } = await getCategoryBySlug(slug)
 
    if (!category) {
       return <div>Category not found</div>
    }
+
+   const posts = category.posts;
 
    const matchedCategory = allCategories.find((c) => c.name === category.title)
 
@@ -86,7 +88,10 @@ export default async function CategoryPage(
                <>
                   <div className="grid md:grid-cols-3 gap-6">
                      {posts.map((post) => (
-                        < BlogCard key={post.slug} post={post} />
+                        <BlogCard
+                           key={post.slug}
+                           post={post}
+                        />
                      ))}
                   </div>
 

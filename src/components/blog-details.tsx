@@ -1,19 +1,19 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Calendar } from "lucide-react"
+import { Calendar, Clock } from "lucide-react"
 import { Badge } from "./ui/badge";
-import { PostProps } from "@/lib/types";
+import type { Post } from "@/lib/types";
 
 interface CardContent {
-   post: PostProps
+   post: Post
 }
 
 export default function BlogDetails(
    { post }: CardContent
 ) {
    const formattedDate = new Date(post.createdAt).toLocaleDateString();
-   const user = post?.user
+   const author = post?.author
 
    return (
       <article className="max-w-4xl mx-auto px-4 py-12">
@@ -39,11 +39,11 @@ export default function BlogDetails(
          <div className="flex items-center justify-between py-6 border-y">
             <div className="flex items-center space-x-4">
                <Avatar>
-                  <AvatarImage src={user?.avatar} alt={user.firstName} />
-                  <AvatarFallback>{user.firstName}</AvatarFallback>
+                  <AvatarImage src={author?.avatar} alt={author.firstName} />
+                  <AvatarFallback>{author.firstName}</AvatarFallback>
                </Avatar>
                <div>
-                  <p className="font-medium">{user.firstName}</p>
+                  <p className="font-medium">{author.firstName}</p>
                </div>
             </div>
             <div className="flex items-center space-x-4 text-sm text-gray-500">
@@ -51,10 +51,10 @@ export default function BlogDetails(
                   <Calendar className="h-4 w-4 mr-2" />
                   {formattedDate}
                </div>
-               {/* <div className="flex items-center">
+               <div className="flex items-center">
                   <Clock className="h-4 w-4 mr-2" />
-                  {post.readingTime}
-               </div> */}
+                  5 min read
+               </div>
             </div>
          </div>
 

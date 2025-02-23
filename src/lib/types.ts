@@ -2,8 +2,8 @@ import type { UseFormReturn } from "react-hook-form";
 import type { PostFormValues } from "./validations/post";
 
 
-export interface CreateUserParams {
-   id: string;
+export interface CreateAuthorParams {
+   clerkId: string;
    email: string;
    userName: string;
    firstName: string;
@@ -11,43 +11,49 @@ export interface CreateUserParams {
    avatar: string;
 }
 
-export interface User {
+export interface Author {
    id: string;
+   clerkId: string;
    email: string;
    userName: string;
    firstName: string;
    lastName: string;
    avatar: string;
    createdAt: Date;
-}
-export interface PostProps {
-   id: string
-   title: string
-   excerpt: string
-   content: string
-   userId: string
-   slug: string
-   imageUrl: string
-   createdAt: Date
-   category: Category
-   user: User
+   updatedAt: Date;
 }
 
 export interface Category {
-   id: number;
+   id: string;
    title: string;
    slug: string;
    description: string;
    createdAt: Date;
    updatedAt: Date;
-   _count: {
-      posts: number;
-   };
 }
 
 export interface CategoriesProps {
    category: Category[];
 }
+
+export interface Post {
+   id: string
+   title: string
+   excerpt: string
+   content: string
+   authorId: string
+   slug: string
+   imageUrl: string
+   createdAt: Date
+   category: Category
+   author: Author
+}
+
+export interface PostProps {
+   post: Post[]
+}
+
+
 
 export interface FileProps {
    setSelectedImage: (value: File | null) => void;

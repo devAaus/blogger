@@ -2,7 +2,7 @@ import React from 'react'
 import { toast } from 'sonner'
 import { Button } from './ui/button'
 import { ImagePlus, X } from "lucide-react";
-import { FileProps } from '@/lib/types';
+import type { FileProps } from '@/lib/types';
 import Image from 'next/image';
 import { Input } from './ui/input';
 

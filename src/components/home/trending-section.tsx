@@ -1,7 +1,12 @@
 import { TrendingUp } from "lucide-react"
 import BlogCard from "../blog-card"
+import type { Post } from "@/lib/types"
+import Link from "next/link"
+import { buttonVariants } from "../ui/button"
 
-export default function TrendingSection({ trendingPosts }: { trendingPosts: any[] }) {
+export default function TrendingSection(
+   { trendingPosts }: { trendingPosts: Post[] }
+) {
    return (
       <section className="container px-4 md:px-6 py-12">
          <div className="flex items-center gap-2 mb-8">
@@ -18,7 +23,7 @@ export default function TrendingSection({ trendingPosts }: { trendingPosts: any[
             <h2>
                No trending posts found. Check back later for more updates.
                <br />
-               <a href="/posts">View all posts</a>
+               <Link href="/posts" className={buttonVariants()}>View all posts</Link>
             </h2>
          )}
       </section>

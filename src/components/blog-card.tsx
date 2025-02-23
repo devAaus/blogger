@@ -4,14 +4,16 @@ import Image from "next/image"
 import { Badge } from "./ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { BookOpen } from "lucide-react"
-import { PostProps } from "@/lib/types"
+import { Post } from "@/lib/types"
 
 interface CardContent {
-   post: PostProps
+   post: Post
 }
+
 
 export default function BlogCard({ post }: CardContent) {
    const formattedDate = new Date(post.createdAt).toLocaleDateString();
+   const author = post?.author;
 
    return (
       <Card className="h-full group hover:shadow-lg transition-shadow">
@@ -24,12 +26,12 @@ export default function BlogCard({ post }: CardContent) {
                   className="object-cover transition-transform group-hover:scale-105 border-b"
                />
             </Link>
-            {/* <div className="absolute top-2 right-2">
+            <div className="absolute top-2 right-2">
                <Badge variant="secondary" className="flex items-center gap-1">
                   <BookOpen className="h-3 w-3" />
-                  {post?.views ?? 0} views
+                  0 views
                </Badge>
-            </div> */}
+            </div>
          </div>
          <CardHeader>
             <Badge className="w-fit mb-2" variant="outline">
@@ -51,13 +53,13 @@ export default function BlogCard({ post }: CardContent) {
          <CardFooter className="flex justify-between items-center">
             <div className="flex items-center gap-2">
                <Avatar className="h-8 w-8">
-                  <AvatarImage src={post?.user?.avatar} alt={post?.user?.firstName} />
+                  <AvatarImage src={author.avatar} alt={author.firstName} />
                   <AvatarFallback>
-                     {post?.user?.firstName}
+                     {author.firstName}
                   </AvatarFallback>
                </Avatar>
                <span className="text-sm font-medium">
-                  {post?.user?.firstName} {post?.user?.lastName}
+                  {author.firstName} {author.lastName}
                </span>
             </div>
             <span className="text-sm text-gray-500">

@@ -1,7 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { WebhookEvent } from '@clerk/nextjs/server'
-import { createUser } from '@/actions/users-actions'
+import type { WebhookEvent } from '@clerk/nextjs/server'
+import { createAuthor } from '@/actions/author-actions'
 
 import { createClerkClient } from '@clerk/nextjs/server'
 
@@ -48,14 +48,14 @@ export async function POST(req: Request) {
    }
 
    // Get the ID and type
-   const { id } = evt.data
+   // const { id } = evt.data
    const eventType = evt.type
 
    if (eventType === 'user.created') {
       const { id, email_addresses, image_url, first_name, last_name, username } = evt.data
 
       const user = {
-         id,
+         clerkId: id,
          email: email_addresses[0]?.email_address ?? '',
          firstName: first_name ?? '',
          lastName: last_name ?? '',
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
          avatar: image_url || '',
       }
 
-      const newUser = await createUser(user)
+      const newUser = await createAuthor(user)
 
       if (newUser) {
          await clerkClient.users.updateUserMetadata(id, {

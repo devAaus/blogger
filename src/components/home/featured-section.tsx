@@ -5,8 +5,12 @@ import Image from 'next/image'
 import { Badge } from '../ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { ArrowRight, Clock } from "lucide-react"
+import { Post } from '@/lib/types'
 
-export default function FeaturedSection({ featuredPost }: { featuredPost: any }) {
+export default function FeaturedSection(
+   { featuredPost }: { featuredPost: Post }
+) {
+   const author = featuredPost?.author
    return (
       <section className="container px-4 md:px-6 py-12">
          <div className="flex items-center justify-between mb-8">
@@ -21,7 +25,7 @@ export default function FeaturedSection({ featuredPost }: { featuredPost: any })
                <div className="md:grid md:grid-cols-2 gap-6">
                   <div className="relative aspect-video md:aspect-auto overflow-hidden">
                      <Image
-                        src={featuredPost.image || "/placeholder.svg"}
+                        src={featuredPost.imageUrl || "/placeholder.svg"}
                         alt={featuredPost.title}
                         fill
                         className="object-cover transition-transform group-hover:scale-105"
@@ -29,24 +33,23 @@ export default function FeaturedSection({ featuredPost }: { featuredPost: any })
                   </div>
                   <div className="p-6 flex flex-col justify-center">
                      <Badge className="w-fit mb-4" variant="secondary">
-                        {featuredPost.category}
+                        {featuredPost.category.title}
                      </Badge>
                      <CardTitle className="text-2xl md:text-3xl font-instrument-serif mb-4">{featuredPost.title}</CardTitle>
                      <p className="text-gray-500 mb-6 line-clamp-3">{featuredPost.excerpt}</p>
                      <div className="flex items-center justify-between mt-auto">
                         <div className="flex items-center gap-3">
                            <Avatar>
-                              <AvatarImage src={featuredPost.author.avatar} alt={featuredPost.author.name} />
-                              <AvatarFallback>{featuredPost.author.name[0]}</AvatarFallback>
+                              <AvatarImage src={author.avatar} alt={author.firstName} />
+                              <AvatarFallback>{author.firstName}</AvatarFallback>
                            </Avatar>
                            <div>
-                              <p className="font-medium">{featuredPost.author.name}</p>
-                              <p className="text-sm text-gray-500">{featuredPost.author.role}</p>
+                              <p className="font-medium">{author.firstName}</p>
                            </div>
                         </div>
                         <div className="flex items-center text-sm text-gray-500">
                            <Clock className="mr-1 h-4 w-4" />
-                           {featuredPost.readTime}
+                           5 min read
                         </div>
                      </div>
                   </div>

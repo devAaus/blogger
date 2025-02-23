@@ -4,30 +4,18 @@ import { postFormSchema } from "@/lib/validations/post"
 import { prisma } from "@/server/db"
 import slugify from "slugify"
 import { currentUser } from '@clerk/nextjs/server'
-import { getUserById } from "./users-actions"
 
 
 export async function getAllPosts() {
    const posts = await prisma.post.findMany({
       include: {
          category: true,
+         author: true,
       },
       orderBy: { createdAt: "desc" },
    })
 
-   // Fetch user details from Clerk for each post's userId
-   const postsWithUserDetails = await Promise.all(
-      posts.map(async (post) => {
-         // Fetch user details from Clerk using the userId
-         const user = await getUserById(post.userId)
-         return {
-            ...post,
-            user
-         }
-      })
-   )
-
-   return postsWithUserDetails;
+   return posts;
 }
 
 export async function getPostBySlug(slug: string) {
@@ -37,6 +25,7 @@ export async function getPostBySlug(slug: string) {
       },
       include: {
          category: true,
+         author: true,
       },
    })
 
@@ -44,12 +33,7 @@ export async function getPostBySlug(slug: string) {
       throw new Error("Post not found")
    }
 
-   const user = await getUserById(post.userId)
-
-   return {
-      ...post,
-      user
-   }
+   return post;
 }
 
 export async function createPost(formData: FormData) {
@@ -78,7 +62,7 @@ export async function createPost(formData: FormData) {
          content: validatedData.content,
          imageUrl: validatedData.imageUrl,
          categorySlug: validatedData.categorySlug,
-         userId: user.id,
+         authorId: user.id,
       },
    })
 
