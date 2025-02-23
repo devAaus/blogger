@@ -3,7 +3,7 @@ import { Author } from "@/lib/types"
 import AuthorCard from "./author-card"
 
 interface TopAuthorsProps {
-   topAuthors: Author[]
+   topAuthors: (Author & { _count: { posts: number } })[]
 }
 
 export default function TopAuthors(

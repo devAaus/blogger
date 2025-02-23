@@ -6,11 +6,8 @@ import { prisma } from '@/server/db';
 export async function getAllAuthors() {
    const author = await prisma.author.findMany({
       include: {
-         posts: {
-            include: {
-               category: true,
-               author: true,
-            },
+         _count: {
+            select: { posts: true }
          },
       },
       orderBy: { updatedAt: "desc" },

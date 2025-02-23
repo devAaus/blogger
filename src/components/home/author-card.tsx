@@ -1,11 +1,11 @@
 import { Card, CardContent, } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Author } from "@/lib/types"
-import Link from "next/link";
 import AuthorAvatar from "../author-avatar";
 
 interface AuthorCardProps {
-   author: Author;
+   author: Author & {
+      _count: { posts: number };
+   }
 }
 
 export default function AuthorCard(
@@ -14,10 +14,12 @@ export default function AuthorCard(
    return (
       <Card key={author.firstName}>
          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-               <AuthorAvatar author={author} />
+            <div className="flex justify-between items-center gap-4">
+               <AuthorAvatar author={author} key={author.id} />
                <div className="text-right">
-                  <div className="font-medium">5 posts</div>
+                  <div className="font-medium">
+                     {author._count.posts} posts
+                  </div>
                </div>
             </div>
          </CardContent>

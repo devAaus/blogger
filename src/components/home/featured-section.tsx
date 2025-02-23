@@ -24,34 +24,37 @@ export default function FeaturedSection(
                <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
          </div>
-         <Link href={`/posts/${featuredPost?.slug}`}>
-            <Card className="group overflow-hidden p-1">
-               <div className="md:grid md:grid-cols-2 gap-6">
-                  <div className="relative aspect-video md:aspect-auto overflow-hidden">
+
+         <Card className="group overflow-hidden p-1">
+            <div className="md:grid md:grid-cols-2 gap-6">
+               <div className="relative aspect-video md:aspect-auto overflow-hidden">
+                  <Link href={`/posts/${featuredPost?.slug}`}>
                      <Image
                         src={featuredPost?.imageUrl || "/placeholder.svg"}
                         alt={featuredPost?.title ?? ''}
                         fill
                         className="object-cover transition-transform group-hover:scale-105"
                      />
-                  </div>
-                  <div className="p-6 flex flex-col justify-center">
-                     <Badge className="w-fit mb-4" variant="secondary">
-                        {featuredPost?.category.title}
-                     </Badge>
-                     <CardTitle className="text-2xl md:text-3xl font-instrument-serif mb-4">{featuredPost?.title}</CardTitle>
-                     <p className="text-gray-500 mb-6 line-clamp-3">{featuredPost?.excerpt}</p>
-                     <div className="flex items-center justify-between mt-auto">
-                        <AuthorAvatar author={author} />
-                        <div className="flex items-center text-sm text-gray-500">
-                           <Clock className="mr-1 h-4 w-4" />
-                           5 min read
-                        </div>
+                  </Link>
+               </div>
+               <div className="p-6 flex flex-col justify-center">
+                  <Badge className="w-fit mb-4" variant="secondary">
+                     {featuredPost?.category.title}
+                  </Badge>
+                  <CardTitle className="text-2xl md:text-3xl font-instrument-serif mb-4">
+                     {featuredPost?.title}
+                  </CardTitle>
+                  <p className="text-gray-500 mb-6 line-clamp-3">{featuredPost?.excerpt}</p>
+                  <div className="flex items-center justify-between mt-auto">
+                     <AuthorAvatar author={author} />
+                     <div className="flex items-center text-sm text-gray-500">
+                        <Clock className="mr-1 h-4 w-4" />
+                        5 min read
                      </div>
                   </div>
                </div>
-            </Card>
-         </Link>
-      </section>
+            </div>
+         </Card>
+      </section >
    )
 }
