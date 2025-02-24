@@ -13,6 +13,9 @@ export default async function DashboardPage() {
    const posts = await getCurrentUserPosts()
    const user = await getLoggedInUser()
 
+   const firstName = user?.firstName ?? '';
+   const lastName = user?.lastName ?? '';
+
    return (
       <div className="container max-w-7xl mx-auto px-4 py-12">
          <div className="grid gap-8">
@@ -25,10 +28,13 @@ export default async function DashboardPage() {
                         <AvatarFallback>{user?.firstName}</AvatarFallback>
                      </Avatar>
                      <div className="flex-1">
-                        <h1 className="text-3xl font-instrument-serif mb-2">
-                           {user?.firstName}
+                        <h1 className="text-3xl font-instrument-serif">
+                           {firstName + ' ' + lastName}
                         </h1>
-                        <p className="text-gray-500 mb-4">
+                        <p className="text-gray-500">
+                           @{user?.userName}
+                        </p>
+                        <p className="text-gray-500 mb-2">
                            {user?.email}
                         </p>
                         <div className="flex gap-4">

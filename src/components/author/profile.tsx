@@ -34,7 +34,9 @@ export default function Profile(
                      <h1 className="text-3xl font-instrument-serif mb-1">
                         {firstName + ' ' + lastName}
                      </h1>
-                     <p className="text-muted-foreground">@{user.userName}</p>
+                     <p className="text-muted-foreground">
+                        @{user.userName}
+                     </p>
                   </div>
                   <div className="flex gap-3">
                      <Button>Follow</Button>

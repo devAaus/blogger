@@ -9,7 +9,7 @@ import AuthorAvatar from '../author-avatar'
 import { formattedDate } from '@/lib/utils'
 
 interface FeaturedProps {
-   featuredPost: Post | undefined
+   featuredPost: Post
 }
 
 export default function FeaturedSection(
@@ -56,7 +56,7 @@ export default function FeaturedSection(
                      <AuthorAvatar author={author} />
                      <div className="flex items-center text-sm text-gray-500">
                         <Calendar className="mr-1 h-4 w-4" />
-                        {formattedDate(featuredPost?.createdAt)}
+                        {formattedDate(featuredPost.createdAt)}
                      </div>
                   </div>
                </div>
