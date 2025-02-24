@@ -6,6 +6,7 @@ import { Badge } from "./ui/badge";
 import type { Post } from "@/lib/types";
 import NotFound from "@/app/not-found";
 import { Button } from "./ui/button";
+import parse, { domToReact, HTMLReactParserOptions, Element, DOMNode } from 'html-react-parser';
 
 interface CardContent {
    post: Post
@@ -76,8 +77,8 @@ export default function BlogDetails(
             />
          </div>
 
-         <div className="prose prose-lg max-w-none">
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+         <div className="max-w-none tiptap">
+            {parse(post.content)}
          </div>
       </article>
    )

@@ -103,7 +103,20 @@ export async function createPost(formData: FormData) {
 
    const validatedData = postFormSchema.parse(data)
 
-   const slug = slugify(validatedData.title, { lower: true, strict: true })
+   let slug = slugify(validatedData.title, { lower: true, strict: true })
+   let existingPost = await prisma.post.findUnique({
+      where: { slug },
+   })
+
+   // If slug exists, append a random number
+   while (existingPost) {
+      const randomNum = Math.floor(1000 + Math.random() * 9000) // Generates a 4-digit random number
+      slug = `${slug}-${randomNum}`
+
+      existingPost = await prisma.post.findUnique({
+         where: { slug },
+      })
+   }
 
    await prisma.post.create({
       data: {

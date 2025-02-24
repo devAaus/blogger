@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import type { FormProps } from "@/lib/types";
 import FileUploader from "../file-uploader";
+import TiptapEditor from "../tiptap-editor";
 
 
 export default function BlogForm(
@@ -106,7 +107,7 @@ export default function BlogForm(
                   />
                </div>
 
-               <FormField
+               {/* <FormField
                   control={form.control}
                   name="content"
                   render={({ field }) => (
@@ -118,8 +119,26 @@ export default function BlogForm(
                         <FormMessage />
                      </FormItem>
                   )}
+               /> */}
+
+               <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                     <FormItem>
+                        <FormLabel>Content</FormLabel>
+                        <FormControl>
+                           <TiptapEditor
+                              initialContent={field.value}
+                              onChange={field.onChange}
+                           />
+                        </FormControl>
+                        <FormMessage />
+                     </FormItem>
+                  )}
                />
             </div>
+
          </CardContent>
       </Card>
    );
