@@ -23,7 +23,7 @@ export default async function HomePage() {
   return (
     <main className="flex-1">
       <HeroSection />
-      <FeaturedSection featuredPost={featuredPost} />
+      {featuredPost && <FeaturedSection featuredPost={featuredPost} />}
       <TrendingSection trendingPosts={trendingPosts} />
 
       <section className="container px-4 md:px-6 py-12">
