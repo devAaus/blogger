@@ -16,6 +16,7 @@ import { createPost } from "@/actions/posts-actions"
 import { useUploadThing } from "@/utils/uploadthing"
 import type { CategoriesProps } from "@/lib/types"
 import BlogForm from "./blog-form"
+import Preview from "./preview"
 
 export default function CreateBlog(
    { category }: CategoriesProps
@@ -134,11 +135,12 @@ export default function CreateBlog(
                <DialogHeader>
                   <DialogTitle className="text-2xl font-instrument-serif">Preview Post</DialogTitle>
                </DialogHeader>
-               <article className="prose prose-lg max-w-none">
-                  <h1 className="text-4xl font-instrument-serif mb-4">{form.getValues("title") || "Untitled Post"}</h1>
-                  {form.getValues("excerpt") && <p className="text-xl text-gray-500 mb-8">{form.getValues("excerpt")}</p>}
-                  <div dangerouslySetInnerHTML={{ __html: form.getValues("content") }} />
-               </article>
+               <Preview
+                  title={form.getValues("title") ?? ""}
+                  excerpt={form.getValues("excerpt") ?? ""}
+                  content={form.getValues("content") ?? ""}
+                  imageUrl={form.getValues("imageUrl") ?? ""}
+               />
             </DialogContent>
          </Dialog>
       </div>

@@ -67,18 +67,25 @@ export default function BlogForm(
                   )}
                />
 
-               <FormItem>
-                  <FormLabel>Cover Image</FormLabel>
-                  <FormControl>
-                     <FileUploader
-                        setSelectedImage={setSelectedImage}
-                        previewUrl={previewUrl}
-                        setPreviewUrl={setPreviewUrl}
-                        fileInputRef={fileInputRef}
-                     />
-                  </FormControl>
-                  <FormDescription>Recommended size: 1200x630 pixels. Max size: 5MB.</FormDescription>
-               </FormItem>
+               <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                     <FormItem>
+                        <FormLabel>Cover Image</FormLabel>
+                        <FormControl>
+                           <FileUploader
+                              setSelectedImage={setSelectedImage}
+                              previewUrl={previewUrl}
+                              setPreviewUrl={setPreviewUrl}
+                              fileInputRef={fileInputRef}
+                              imageUrl={field.value}
+                           />
+                        </FormControl>
+                        <FormDescription>Recommended size: 1200x630 pixels. Max size: 5MB.</FormDescription>
+                     </FormItem>
+                  )}
+               />
 
                <div className="grid grid-cols-2 gap-6">
                   <FormField

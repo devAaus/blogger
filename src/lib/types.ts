@@ -47,6 +47,7 @@ export interface Post {
    imageUrl: string
    views: number
    createdAt: Date
+   categorySlug: string
    category: Category
    author: Author
 }
@@ -58,6 +59,7 @@ export interface PostProps {
 
 
 export interface FileProps {
+   imageUrl?: string
    setSelectedImage: (value: File | null) => void;
    previewUrl: string | null;
    setPreviewUrl: (value: string | null) => void;

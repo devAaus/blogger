@@ -39,7 +39,7 @@ export function UserPostsCard({ post }: UserPostsProps) {
             </Link>
             <div className="absolute top-2 right-2">
                <div className="flex items-center gap-3">
-                  <Link href={`/posts/${post.id}/edit`} className={buttonVariants({ variant: "outline", size: "icon" })}>
+                  <Link href={`/posts/${post.slug}/edit`} className={buttonVariants({ variant: "outline", size: "icon" })}>
                      <Pencil className="h-5 w-5" />
                   </Link>
                   <Button

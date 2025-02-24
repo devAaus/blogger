@@ -1,4 +1,4 @@
-import { getPostBySlug } from "@/actions/posts-actions"
+import { getPostBySlug, incrementPostViews } from "@/actions/posts-actions"
 import NotFound from "@/app/not-found"
 import BlogDetails from "@/components/blog-details"
 
@@ -10,6 +10,7 @@ export default async function PostPage(
    { params }: ParamsProps
 ) {
    const slug = (await params).slug
+   await incrementPostViews(slug)
    const post = await getPostBySlug(slug)
    if (!post) {
       return <NotFound />

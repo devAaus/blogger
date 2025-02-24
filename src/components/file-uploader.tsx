@@ -8,6 +8,7 @@ import { Input } from './ui/input';
 
 export default function FileUploader(
    {
+      imageUrl,
       setSelectedImage,
       previewUrl,
       setPreviewUrl,
@@ -65,6 +66,9 @@ export default function FileUploader(
    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault()
    }
+
+   const displayImage = imageUrl || previewUrl;
+
    return (
       <div
          className="relative border-2 border-dashed rounded-lg p-4 text-center hover:border-gray-400 transition-colors"
@@ -78,10 +82,10 @@ export default function FileUploader(
             className="hidden"
             onChange={handleImageSelect}
          />
-         {previewUrl ? (
+         {displayImage ? (
             <div className="relative">
                <Image
-                  src={previewUrl || "/placeholder.svg"}
+                  src={displayImage}
                   alt="Cover preview"
                   width={300}
                   height={300}
