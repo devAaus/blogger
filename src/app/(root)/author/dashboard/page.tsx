@@ -10,7 +10,7 @@ import { getLoggedInUser } from "@/actions/author-actions"
 import StyledLink from "@/components/StyledLink"
 
 export default async function DashboardPage() {
-   const posts = await getCurrentUserPosts()
+   const { posts, stats } = await getCurrentUserPosts()
    const user = await getLoggedInUser()
 
    const firstName = user?.firstName ?? '';
@@ -51,7 +51,7 @@ export default async function DashboardPage() {
             </Card>
 
             {/* Stats Cards */}
-            <UserStats />
+            <UserStats stats={stats} />
 
             <div>
                <h2 className="text-2xl font-instrument-serif mb-6">
@@ -60,7 +60,7 @@ export default async function DashboardPage() {
 
                {posts.length > 0 ? (
                   <>
-                     <div className="grid md:grid-cols-3 gap-6">
+                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {posts.map((post) => (
                            <UserPostsCard
                               key={post.slug}

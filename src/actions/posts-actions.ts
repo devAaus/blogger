@@ -54,17 +54,30 @@ export async function getPostsByUsername(username: string) {
 }
 
 export async function getCurrentUserPosts() {
-   const user = await currentUser()
+   const user = await currentUser();
    if (!user) {
-      throw new Error("Current user not found")
+      throw new Error("Current user not found");
    }
 
-   return await prisma.post.findMany({
+   // Fetch posts and stats
+   const posts = await prisma.post.findMany({
       where: { authorId: user.id },
       include: { category: true, author: true },
       orderBy: { createdAt: "desc" },
-   })
+   });
+
+   const totalPosts = posts.length;
+   const totalViews = posts.reduce((sum, post) => sum + (post.views || 0), 0);
+
+   return {
+      posts,
+      stats: {
+         totalPosts,
+         totalViews,
+      }
+   };
 }
+
 
 export async function createPost(formData: FormData) {
    const user = await currentUser()

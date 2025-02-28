@@ -1,17 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, Eye, ThumbsUp, MessageCircle } from "lucide-react"
 
-export function UserStats() {
-   const stats = [
+
+interface UserStats {
+   stats: {
+      totalPosts: number;
+      totalViews: number;
+   }
+}
+
+export function UserStats({ stats }: UserStats) {
+   const allStats = [
       {
          title: "Total Posts",
-         value: "12",
+         value: stats.totalPosts,
          icon: BookOpen,
          description: "Published posts",
       },
       {
          title: "Total Views",
-         value: "2.3K",
+         value: stats.totalViews,
          icon: Eye,
          description: "All-time views",
       },
@@ -31,7 +39,7 @@ export function UserStats() {
 
    return (
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-         {stats.map((stat) => (
+         {allStats.map((stat) => (
             <Card key={stat.title}>
                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>

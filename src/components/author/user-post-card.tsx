@@ -72,7 +72,7 @@ export function UserPostsCard({ post }: UserPostsProps) {
             </p>
          </CardContent>
          <CardFooter className="flex justify-between text-sm text-gray-500">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
                <span className="flex items-center gap-1">
                   <Eye className="h-4 w-4" />
                   {post.views}
