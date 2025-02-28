@@ -1,13 +1,13 @@
-import Link from "next/link"
+
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { PenSquare, Settings } from "lucide-react"
+import { PenSquare } from "lucide-react"
 import { UserPostsCard } from "@/components/author/user-post-card"
 import { UserStats } from "@/components/author/user-stats"
 import { getCurrentUserPosts } from "@/actions/posts-actions"
 import { getLoggedInUser } from "@/actions/author-actions"
+import StyledLink from "@/components/StyledLink"
 
 export default async function DashboardPage() {
    const posts = await getCurrentUserPosts()
@@ -39,10 +39,10 @@ export default async function DashboardPage() {
                         </p>
                         <div className="flex gap-4">
                            <Button asChild>
-                              <Link href="/posts/new">
+                              <StyledLink href="/posts/new">
                                  <PenSquare className="mr-2 h-4 w-4" />
                                  Create New Post
-                              </Link>
+                              </StyledLink>
                            </Button>
                         </div>
                      </div>

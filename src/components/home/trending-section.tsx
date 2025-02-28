@@ -1,8 +1,7 @@
 import { TrendingUp } from "lucide-react"
 import BlogCard from "../blog-card"
 import type { Post } from "@/lib/types"
-import Link from "next/link"
-import { buttonVariants } from "../ui/button"
+import StyledLink from "../StyledLink"
 
 export default function TrendingSection(
    { trendingPosts }: { trendingPosts: Post[] }
@@ -28,7 +27,9 @@ export default function TrendingSection(
             <h2>
                No trending posts found. Check back later for more updates.
                <br />
-               <Link href="/posts" className={buttonVariants()}>View all posts</Link>
+               <StyledLink href="/posts" button>
+                  View all posts
+               </StyledLink>
             </h2>
          )}
       </section>

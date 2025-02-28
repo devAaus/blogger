@@ -1,7 +1,6 @@
 import React from 'react'
-import { Button } from '../ui/button'
-import Link from 'next/link'
 import { ArrowRight } from "lucide-react"
+import StyledLink from '../StyledLink'
 
 export default function HeroSection() {
    return (
@@ -19,15 +18,14 @@ export default function HeroSection() {
                   </p>
                </div>
                <div className="flex flex-col sm:flex-row gap-4 min-w-[200px]">
-                  <Button asChild size="lg" className="bg-black text-white hover:bg-black/90">
-                     <Link href="/posts">
-                        Start Reading
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                     </Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline">
-                     <Link href="/posts/new">Start Writing</Link>
-                  </Button>
+                  <StyledLink href="/posts" size="lg" button>
+                     Start Reading
+                     <ArrowRight className="ml-2 h-4 w-4" />
+                  </StyledLink>
+                  <StyledLink href="/posts/new" size={'lg'} variant={'outline'} button>
+                     Start Writing
+                  </StyledLink>
+
                </div>
             </div>
          </div>

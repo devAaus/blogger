@@ -1,7 +1,6 @@
 import { getAllCategories } from "@/actions/category-actions"
 import Categorycard from "@/components/category-card"
-import { buttonVariants } from "@/components/ui/button"
-import Link from "next/link"
+import StyledLink from "@/components/StyledLink"
 
 export default async function CategoriesPage() {
    const categories = await getAllCategories()
@@ -23,9 +22,9 @@ export default async function CategoriesPage() {
                <h2>
                   No categories found. Check back later for more updates.
                </h2>
-               <Link href="/" className={buttonVariants()}>
+               <StyledLink href="/" button>
                   Visit the homepage
-               </Link>
+               </StyledLink>
             </div>
          )}
       </main>

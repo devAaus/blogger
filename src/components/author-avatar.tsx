@@ -1,6 +1,6 @@
 import { Author } from '@/lib/types'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import Link from 'next/link'
+import StyledLink from './StyledLink'
 
 interface AuthorProps {
    author: Author | undefined
@@ -12,7 +12,7 @@ export default function AuthorAvatar(
    const firstName = author?.firstName ?? ''
    const lastName = author?.lastName ?? ''
    return (
-      <Link href={`/author/${author?.userName}`} className="flex justify-center items-center gap-3">
+      <StyledLink href={`/author/${author?.userName}`} className="flex justify-center items-center gap-3">
          <Avatar>
             <AvatarImage src={author?.avatar} alt={author?.firstName} />
             <AvatarFallback>{author?.firstName}</AvatarFallback>
@@ -22,6 +22,6 @@ export default function AuthorAvatar(
                {firstName + ' ' + lastName}
             </p>
          </div>
-      </Link>
+      </StyledLink>
    )
 }

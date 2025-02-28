@@ -1,8 +1,7 @@
-import Link from "next/link"
 import Image from "next/image"
 import logo from "public/logo.png"
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
-import { Button, buttonVariants } from "./ui/button"
+import StyledLink from "./StyledLink"
 
 const navLinks = [
    {
@@ -24,7 +23,7 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 w-full border-b bg-[#F2F1EA]/80 backdrop-blur-lg">
          <div className="container flex h-16 items-center justify-between px-4">
             <div className="flex items-center gap-6">
-               <Link href="/" className="flex items-center space-x-2">
+               <StyledLink href="/" className="flex items-center space-x-2">
                   <div className="w-[72px] h-[20px] relative">
                      <Image
                         src={logo}
@@ -36,29 +35,31 @@ export default function Navbar() {
                         quality={100}
                      />
                   </div>
-               </Link>
+               </StyledLink>
                <nav className="hidden md:flex gap-6">
                   {navLinks.map((link) => (
-                     <Link key={link.href} href={link.href} className="text-sm font-medium transition-colors hover:text-primary">
+                     <StyledLink
+                        key={link.href}
+                        href={link.href}
+                        className="text-sm font-medium transition-colors hover:text-primary"
+                     >
                         {link.title}
-                     </Link>
+                     </StyledLink>
                   ))}
                </nav>
             </div>
             <div className="flex items-center gap-4">
                <SignedIn>
-                  <Link href={'/posts/new'} className={buttonVariants()}>
+                  <StyledLink href={'/posts/new'} button>
                      Create a Post
-                  </Link>
-                  <Link href={'/author/dashboard'} className={buttonVariants()}>
+                  </StyledLink>
+                  <StyledLink href={'/author/dashboard'} button>
                      Dashboard
-                  </Link>
+                  </StyledLink>
                   <UserButton />
                </SignedIn>
                <SignedOut>
-                  <Button asChild>
-                     <Link href="/sign-in">Login</Link>
-                  </Button>
+                  <StyledLink href="/sign-in" button>Login</StyledLink>
                </SignedOut>
             </div>
          </div>

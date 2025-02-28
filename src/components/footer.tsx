@@ -1,8 +1,8 @@
-import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import { Facebook, Github, Instagram, Linkedin, X, } from 'lucide-react'
 import logo from "public/logo.png"
+import StyledLink from './StyledLink'
 
 export default function Footer() {
    const social = [
@@ -56,29 +56,29 @@ export default function Footer() {
 
                {/* Links */}
                <nav className="flex flex-wrap items-center justify-center gap-4 text-sm">
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <StyledLink href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
                      About
-                  </Link>
-                  <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
+                  </StyledLink>
+                  <StyledLink href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
                      Contact
-                  </Link>
-                  <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
+                  </StyledLink>
+                  <StyledLink href="#privacy" className="text-muted-foreground hover:text-foreground transition-colors">
                      Privacy
-                  </Link>
-                  <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
+                  </StyledLink>
+                  <StyledLink href="#terms" className="text-muted-foreground hover:text-foreground transition-colors">
                      Terms
-                  </Link>
+                  </StyledLink>
                </nav>
 
                {/* Social Links */}
                <div className="flex items-center gap-4">
                   {social.map((s) => (
-                     <Link key={s.href} href={s.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                     <StyledLink key={s.href} href={s.href} className="text-muted-foreground hover:text-foreground transition-colors" target='_blank'>
                         {s.icon}
                         <span className="sr-only">
                            {s.title}
                         </span>
-                     </Link>
+                     </StyledLink>
                   ))}
                </div>
             </div>

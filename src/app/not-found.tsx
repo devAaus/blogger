@@ -1,6 +1,5 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
+import StyledLink from "@/components/StyledLink"
 
 export default function NotFound() {
    return (
@@ -11,12 +10,10 @@ export default function NotFound() {
             The page you're looking for doesn't exist or has been moved.
          </p>
          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild>
-               <Link href="/">Go Home</Link>
-            </Button>
-            <Button variant="outline" asChild>
-               <Link href="/posts">Browse Posts</Link>
-            </Button>
+            <StyledLink href="/" button>Go Home</StyledLink>
+            <StyledLink href="/posts" button variant={'outline'}>
+               Browse Posts
+            </StyledLink>
          </div>
       </div>
    )

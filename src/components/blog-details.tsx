@@ -1,11 +1,11 @@
 import Image from "next/image"
-import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ArrowLeft, Calendar, Clock } from "lucide-react"
 import { Badge } from "./ui/badge";
 import type { Post } from "@/lib/types";
 import { Button } from "./ui/button";
 import parse from 'html-react-parser';
+import StyledLink from "./StyledLink";
 
 interface CardContent {
    post: Post
@@ -19,22 +19,20 @@ export default function BlogDetails(
 
    return (
       <article className="max-w-4xl mx-auto px-4 py-12">
-         <Button variant="ghost" className="mb-8" asChild>
-            <Link href="/posts">
-               <ArrowLeft className="mr-2 h-4 w-4" />
-               All Posts
-            </Link>
-         </Button>
+         <StyledLink href="/posts" button variant={'ghost'} className="mb-8">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            All Posts
+         </StyledLink>
          <div className="space-y-4 text-center mb-12">
             <div className="space-y-2">
-               <Link
+               <StyledLink
                   href={`/categories/${post.category.slug}`}
                   className="inline-block mr-2"
                >
                   <Badge className="w-fit mb-2 text-gray-500 hover:text-gray-900 text-sm font-medium" variant="outline">
                      {post.category.title}
                   </Badge>
-               </Link>
+               </StyledLink>
             </div>
             <h1 className="text-4xl md:text-5xl font-instrument-serif leading-tight">
                {post.title}

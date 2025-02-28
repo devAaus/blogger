@@ -1,9 +1,9 @@
-import Link from 'next/link'
 import { Card, CardContent } from "@/components/ui/card"
 import { allCategories } from '@/lib/data'
 import { Badge } from './ui/badge'
 import { BookOpen } from 'lucide-react'
 import { Category } from '@/lib/types'
+import StyledLink from './StyledLink'
 
 interface CardContent {
    category: Category
@@ -14,7 +14,7 @@ export default function Categorycard(
 ) {
    const matchedCategory = allCategories.find((c) => c.name === category.title)
    return (
-      <Link href={`/categories/${category.slug}`}>
+      <StyledLink href={`/categories/${category.slug}`}>
          <Card className="h-full hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
                <div className="flex items-center justify-between mb-4">
@@ -28,6 +28,6 @@ export default function Categorycard(
                <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
             </CardContent>
          </Card>
-      </Link>
+      </StyledLink>
    )
 }

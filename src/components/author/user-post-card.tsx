@@ -1,14 +1,14 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Calendar, Eye, MessageCircle, Pencil, ThumbsUp, Trash } from "lucide-react"
 import { Post } from "@/lib/types"
 import { formattedDate } from "@/lib/utils"
 import { deletePost } from "@/actions/posts-actions"
 import { toast } from "sonner"
+import StyledLink from "../StyledLink"
 
 interface UserPostsProps {
    post: Post
@@ -29,19 +29,19 @@ export function UserPostsCard({ post }: UserPostsProps) {
    return (
       <Card key={post.id} className="group">
          <div className="aspect-[24/10] relative overflow-hidden rounded-t-lg">
-            <Link href={`/posts/${post.slug}`}>
+            <StyledLink href={`/posts/${post.slug}`}>
                <Image
                   src={post.imageUrl || "/placeholder.svg"}
                   alt={post.title}
                   fill
                   className="object-cover transition-transform group-hover:scale-105 border-b]"
                />
-            </Link>
+            </StyledLink>
             <div className="absolute top-2 right-2">
                <div className="flex items-center gap-3">
-                  <Link href={`/posts/${post.slug}/edit`} className={buttonVariants({ variant: "outline", size: "icon" })}>
+                  <StyledLink href={`/posts/${post.slug}/edit`} button variant="outline" size="icon">
                      <Pencil className="h-5 w-5" />
-                  </Link>
+                  </StyledLink>
                   <Button
                      variant={"outline"}
                      size={"icon"}
@@ -55,12 +55,12 @@ export function UserPostsCard({ post }: UserPostsProps) {
          </div>
          <CardHeader className="relative">
             <CardTitle className="text-xl font-instrument-serif line-clamp-2">
-               <Link href={`/posts/${post.slug}`} className="hover:underline">
+               <StyledLink href={`/posts/${post.slug}`} className="hover:underline">
                   {post.title.length > 30
                      ? post.title.substring(0, 30) + "..."
                      : post.title
                   }
-               </Link>
+               </StyledLink>
             </CardTitle>
          </CardHeader>
          <CardContent>

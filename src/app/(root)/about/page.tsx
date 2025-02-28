@@ -1,10 +1,10 @@
 import Image from "next/image"
-import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight } from "lucide-react"
 import { stats, team } from "@/lib/data"
+import StyledLink from "@/components/StyledLink"
 
 export default function AboutPage() {
 
@@ -19,12 +19,12 @@ export default function AboutPage() {
                   We`&apos;`re building the best platform for discovering and sharing knowledge.
                </p>
                <div className="flex justify-center gap-4">
-                  <Button asChild>
-                     <Link href="/posts">Start Reading</Link>
-                  </Button>
-                  <Button variant="outline" asChild>
-                     <Link href="/contact">Contact Us</Link>
-                  </Button>
+                  <StyledLink href="/posts" button>
+                     Start Reading
+                  </StyledLink>
+                  <StyledLink href="/contact" button>
+                     Contact Us
+                  </StyledLink>
                </div>
             </div>
 
@@ -90,10 +90,10 @@ export default function AboutPage() {
                      Whether you`&apos;`re here to read, write, or connect, we`&apos;`d love to have you as part of our community.
                   </p>
                   <Button asChild size="lg">
-                     <Link href="/posts">
+                     <StyledLink href="/posts">
                         Get Started
                         <ArrowRight className="ml-2 h-4 w-4" />
-                     </Link>
+                     </StyledLink>
                   </Button>
                </CardContent>
             </Card>

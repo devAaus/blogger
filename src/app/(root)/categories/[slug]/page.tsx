@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -6,6 +5,7 @@ import { ArrowLeft, Filter, Search } from "lucide-react"
 import { getCategoryBySlug } from "@/actions/category-actions"
 import { allCategories } from "@/lib/data"
 import BlogCard from "@/components/blog-card"
+import StyledLink from "@/components/StyledLink"
 
 type ParamsProps = {
    params: Promise<{ slug: string }>
@@ -27,12 +27,10 @@ export default async function CategoryPage(
 
    return (
       <main className="container px-4 py-12">
-         <Button variant="ghost" className="mb-8" asChild>
-            <Link href="/categories">
-               <ArrowLeft className="mr-2 h-4 w-4" />
-               All Categories
-            </Link>
-         </Button>
+         <StyledLink href="/categories" button variant={'ghost'} className="mb-8">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            All Categories
+         </StyledLink>
 
          <div className="mb-8">
             <div className="flex items-start justify-between">
@@ -68,10 +66,6 @@ export default async function CategoryPage(
                      <SelectItem value="trending">Trending</SelectItem>
                   </SelectContent>
                </Select>
-               <Button variant="outline" className="w-full md:w-auto">
-                  <Filter className="mr-2 h-4 w-4" />
-                  Filters
-               </Button>
             </div>
          </div>
 
